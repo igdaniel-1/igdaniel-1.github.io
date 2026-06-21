@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>igdaniel — Full-Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #91cdde;
+    --surface: #111111;
+    --border: #ffffff;
+    /* --accent: #f9759b;  <- good salmony pink */
+    --accent: #fd366e;
+    --accent2: #7c6af7;
+    --text: #f0f0f0;
+    --muted: #686868;
+    --sans: 'Space Grotesk', sans-serif;
+    --mono: 'Space Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 2.5rem;
+    border-bottom: 1px solid var(--border);
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 1rem;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 2.5rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,241,53,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,241,53,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    max-width: 900px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1.hero-name {
+    font-size: clamp(3.5rem, 9vw, 7rem);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-name .highlight {
+    color: var(--accent);
+    display: block;
+  }
+
+  .hero-tagline {
+    font-size: 1.2rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    font-family: var(--sans);
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #0a0a0a;
+  }
+
+  .btn-primary:hover {
+    background: #f9759b;
+    transform: translateY(-1px);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-1px);
+  }
+  #linkedInButton:hover{
+    border-color: #0072b1;
+    color:#0072b1;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-family: var(--mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 48px;
+    background: var(--muted);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(0.7); }
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 6rem 2.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h2.section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 3rem;
+    line-height: 1.1;
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin: 0 2.5rem;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .about-text p strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .stat-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    background: var(--surface);
+  }
+
+  .stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    font-family: var(--mono);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .skill-group {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    background: var(--surface);
+    transition: border-color 0.2s;
+  }
+
+  .skill-group:hover {
+    border-color: var(--accent2);
+  }
+
+  .skill-group-title {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent2);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .skill-tag {
+    background: rgba(124,106,247,0.1);
+    color: var(--text);
+    border: 1px solid rgba(124,106,247,0.2);
+    border-radius: 4px;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.8rem;
+  }
+
+  /* PROJECTS */
+  .projects-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+  }
+
+  .projects-header h2 { margin-bottom: 0; }
+
+  .view-all {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: gap 0.2s;
+  }
+
+  .view-all:hover { gap: 0.7rem; }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .project-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.75rem;
+    background: var(--surface);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .project-card:hover {
+    border-color: #333;
+    transform: translateY(-3px);
+  }
+
+  .project-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .project-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .project-icon {
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+
+  .project-card-arrow {
+    color: var(--muted);
+    font-size: 1.2rem;
+    transition: color 0.2s, transform 0.2s;
+  }
+
+  .project-card:hover .project-card-arrow {
+    color: var(--accent);
+    transform: translate(2px, -2px);
+  }
+
+  .project-name {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .project-desc {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .project-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .project-lang {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-family: var(--mono);
+  }
+
+  .lang-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #3572A5;
+  }
+
+  .project-stars {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-family: var(--mono);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .loading-msg {
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 0.875rem;
+    padding: 2rem;
+    text-align: center;
+    grid-column: 1 / -1;
+  }
+
+  /* CONTACT */
+  .contact-inner {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 4rem;
+    background: var(--surface);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-inner::after {
+    content: '';
+    position: absolute;
+    bottom: -60px;
+    right: -60px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(200,241,53,0.04);
+    pointer-events: none;
+  }
+
+  .contact-inner h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+
+  .contact-inner p {
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    font-size: 1.05rem;
+  }
+
+  .contact-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-family: var(--mono);
+  }
+
+  footer a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  footer a:hover { color: var(--accent); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { gap: 1.25rem; }
+    .hero { padding: 6rem 1.25rem 3rem; }
+    section { padding: 4rem 1.25rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .contact-inner { padding: 2.5rem 1.5rem; }
+    footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">igdaniel-1</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="max-width:100%; padding-top:8rem;">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Full-Stack Developer</div>
+    <h1 class="hero-name">
+      Building things
+      <span class="highlight">that work.</span>
+    </h1>
+    <p class="hero-tagline">
+      I design and build distributed systems, networked applications, and clean interfaces — end to end.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn btn-primary">See my work ↓</a>
+      <a href="https://github.com/igdaniel-1" target="_blank" rel="noopener" class="btn btn-outline">GitHub ↗</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    scroll
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About me</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <h2 class="section-title">Hi I'm India!</h2>
+        <p>I'm an NYU CS grad (Go Violets!!! &#9917; &#9917; &#9917;) working as a Full-Stack Software Engineer in New York, New York.</p>
+        <p>I've designed full-stack payment integrations for multiple start-ups
+          as well as vetting critical automation for international enterprises.</p>
+          <p>I excel as an emphathetic leader thanks to my years of experience teaching and serving my community.</p>
+          <p>My creative thinking and decision-making ability make me an asset to fast-paced teams of developers who value quality as much as productivity. </p>
+      <a href="https://github.com/igdaniel-1" target="_blank" rel="noopener" class="btn btn-outline" style="margin-top:0.5rem;">View GitHub profile ↗</a>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card">
+        <div class="stat-number" id="repo-count">—</div>
+        <div class="stat-label">Public repos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="follower-count">—</div>
+        <div class="stat-label">Followers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">∞</div>
+        <div class="stat-label">Stack layers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">01</div>
+        <div class="stat-label">Problems at a time</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">What I use</div>
+  <h2 class="section-title">Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-title">Frontend</div>
+      <div class="skill-tags">
+        <span class="skill-tag">HTML / CSS</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">Responsive design</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Backend</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Node.js</span>
+        <span class="skill-tag">Express</span>
+        <span class="skill-tag">REST APIs</span>
+        <span class="skill-tag">Sockets</span>
+        <span class="skill-tag">Distributed systems</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Systems</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Client-Server Architecture</span>
+        <span class="skill-tag">State Machines</span>
+        <span class="skill-tag">Indexing</span>
+        <span class="skill-tag">Multithreading</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Databases and DevOps</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Git / GitHub</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">MongoDB</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Linux</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">What I've built</div>
+  <div class="projects-header">
+    <h2 class="section-title">Projects</h2>
+    <a class="view-all" href="https://github.com/igdaniel-1?tab=repositories" target="_blank" rel="noopener">All repos →</a>
+  </div>
+  <div class="projects-grid" id="projects-grid">
+    <div class="loading-msg">Fetching repos from GitHub...</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label" style="justify-content:center; margin-bottom:1rem;">Get in touch</div>
+    <h2>Let's work together</h2>
+    <p>Open to collaborations, freelance work, and interesting problems.</p>
+    <div class="contact-links">
+      <a href="mailto:igracedaniel@email.com" class="btn btn-outline">email me!</a>
+      <a href="https://github.com/igdaniel-1" target="_blank" rel="noopener" class="btn btn-primary">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/india-grace-daniel/" id='linkedInButton' class="btn btn-outline">LinkedIn ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2026 igdaniel-1</span>
+  <a href="https://github.com/igdaniel-1" target="_blank" rel="noopener">Built with GitHub API</a>
+</footer>
+
+<script>
+const GITHUB_USER = 'igdaniel-1';
+
+const LANG_COLORS = {
+  Python: '#3572A5',
+  JavaScript: '#f1e05a',
+  TypeScript: '#3178c6',
+  HTML: '#e34c26',
+  CSS: '#563d7c',
+  Go: '#00ADD8',
+  Rust: '#dea584',
+  Java: '#b07219',
+  'C++': '#f34b7d',
+  C: '#555555',
+  Shell: '#89e051',
+};
+
+async function fetchGitHub() {
+  try {
+    const [userRes, reposRes] = await Promise.all([
+      fetch(`https://api.github.com/users/${GITHUB_USER}`),
+      fetch(`https://api.github.com/users/${GITHUB_USER}/repos?sort=updated&per_page=12`)
+    ]);
+    const user = await userRes.json();
+    const repos = await reposRes.json();
+
+    document.getElementById('repo-count').textContent = user.public_repos ?? '—';
+    document.getElementById('follower-count').textContent = user.followers ?? '—';
+
+    renderProjects(repos);
+  } catch (e) {
+    document.getElementById('projects-grid').innerHTML =
+      '<div class="loading-msg">Could not load repos. <a href="https://github.com/igdaniel-1?tab=repositories" target="_blank" style="color:var(--accent)">View on GitHub ↗</a></div>';
+  }
+}
+
+function renderProjects(repos) {
+  const grid = document.getElementById('projects-grid');
+  if (!repos || !repos.length) {
+    grid.innerHTML = '<div class="loading-msg">No public repos found.</div>';
+    return;
+  }
+
+  const projectIcons = ['⚡', '🔧', '🌐', '📡', '🔬', '🛠', '📦', '&#127775'];
+
+  grid.innerHTML = repos.filter(r => !r.fork).map((repo, i) => {
+    const lang = repo.language || '';
+    const color = LANG_COLORS[lang] || '#888';
+    const icon = projectIcons[i % projectIcons.length];
+    const desc = repo.description || 'No description provided.';
+    const stars = repo.stargazers_count;
+    const url = repo.html_url;
+
+    return `
+      <a class="project-card" href="${url}" target="_blank" rel="noopener">
+        <div class="project-card-top">
+          <span class="project-icon">${icon}</span>
+          <span class="project-card-arrow">↗</span>
+        </div>
+        <div class="project-name">${repo.name}</div>
+        <div class="project-desc">${desc}</div>
+        <div class="project-meta">
+          ${lang ? `<span class="project-lang"><span class="lang-dot" style="background:${color}"></span>${lang}</span>` : ''}
+        </div>
+      </a>
+    `;
+  }).join('');
+}
+
+fetchGitHub();
+</script>
+</body>
+</html>
