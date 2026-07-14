@@ -10,13 +10,14 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #91cdde;
+    --bg: #a1dff0; 
+    /* prev background color: #91cdde; */
     --surface: #111111;
     --border: #ffffff;
     /* --accent: #f9759b;  <- good salmony pink */
     --accent: #fd366e;
-    --accent2: #7c6af7;
-    --text: #f0f0f0;
+    --accent2: #a1dff0;
+    --text: #333030;
     --muted: #686868;
     --sans: 'Space Grotesk', sans-serif;
     --mono: 'Space Mono', monospace;
@@ -70,7 +71,7 @@
     transition: color 0.2s;
   }
 
-  .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover { color: #eeeeee; }
 
   /* HERO */
   .hero {
@@ -180,6 +181,15 @@
     border-color: var(--accent);
     color: var(--accent);
     transform: translateY(-1px);
+  }
+  #emailButton{
+    color: #eeeeee;
+  }
+  #emailButton:hover{
+    color: #fd366e;
+  }
+  #linkedInButton{
+    color: #eeeeee;
   }
   #linkedInButton:hover{
     border-color: #0072b1;
@@ -342,7 +352,8 @@
 
   .skill-tag {
     background: rgba(124,106,247,0.1);
-    color: var(--text);
+    /* color: var(--text); */
+    color: #eeeeee;
     border: 1px solid rgba(124,106,247,0.2);
     border-radius: 4px;
     padding: 0.3rem 0.7rem;
@@ -438,7 +449,8 @@
   .project-name {
     font-size: 1.1rem;
     font-weight: 500;
-    color: var(--text);
+    /* color: var(--text); */
+    color:#a1dff0
   }
 
   .project-desc {
@@ -498,6 +510,10 @@
     text-align: center;
     position: relative;
     overflow: hidden;
+  }
+
+  #workTogether{
+    color:#fff59c;
   }
 
   .contact-inner::after {
@@ -612,7 +628,7 @@
         <p>I've designed full-stack payment integrations for multiple start-ups
           as well as vetting critical automation for international enterprises.</p>
           <p>I excel as an emphathetic leader thanks to my years of experience teaching and serving my community.</p>
-          <p>My creative thinking and decision-making ability make me an asset to fast-paced teams of developers who value quality as much as productivity. </p>
+          <p>My creative thinking and decision-making ability make me an asset to fast-paced teams of developers who value quality as highly as productivity. </p>
       <a href="https://github.com/igdaniel-1" target="_blank" rel="noopener" class="btn btn-outline" style="margin-top:0.5rem;">View GitHub profile ↗</a>
     </div>
     <div class="about-stats">
@@ -705,10 +721,10 @@
 <section id="contact">
   <div class="contact-inner">
     <div class="section-label" style="justify-content:center; margin-bottom:1rem;">Get in touch</div>
-    <h2>Let's work together</h2>
+    <h2 id="workTogether">Let's work together</h2>
     <p>Open to collaborations, freelance work, and interesting problems.</p>
     <div class="contact-links">
-      <a href="mailto:igracedaniel@email.com" class="btn btn-outline">email me!</a>
+      <a href="mailto:igracedaniel@email.com" id="emailButton" class="btn btn-outline">email me!</a>
       <a href="https://github.com/igdaniel-1" target="_blank" rel="noopener" class="btn btn-primary">GitHub ↗</a>
       <a href="https://www.linkedin.com/in/india-grace-daniel/" id='linkedInButton' class="btn btn-outline">LinkedIn ↗</a>
     </div>
