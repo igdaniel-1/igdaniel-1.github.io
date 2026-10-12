@@ -183,8 +183,8 @@
   }
 
   .btn-outline:hover {
-    border-color: var(--accent);
-    color: var(--accent);
+    border-color: #da4900;
+    color: #da4900;
     transform: translateY(-1px);
   }
   #emailButton{
@@ -637,6 +637,55 @@
     justify-content: center;
     flex-wrap: wrap;
   }
+/* POLL */
+  .poll {
+    --pl-bg: #0b0b0f;
+    --pl-fg: #f4f4f5;
+    --pl-border: #27272a;
+    --pl-chip: #17171c;
+    --pl-accent: #a78bfa;
+    --pl-good: #22c55e;
+    --pl-bad: #ef4444;
+    max-width: 480px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: var(--pl-bg);
+    color: var(--pl-fg);
+    border: 1px solid var(--pl-border);
+    border-radius: 16px;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) .poll {
+      --pl-bg: #fafafa; --pl-fg: #18181b; --pl-border: #e4e4e7; --pl-chip: #ffffff;
+      --pl-accent: #7c3aed; --pl-good: #16a34a; --pl-bad: #dc2626;
+    }
+  }
+  .poll-question { margin: 0 0 1rem; font-size: 1.15rem; }
+  .poll-options { display: flex; flex-direction: column; gap: 0.6rem; }
+  .poll-option {
+    text-align: left;
+    padding: 0.8rem 1rem;
+    font: inherit;
+    color: inherit;
+    background: var(--pl-chip);
+    border: 1px solid var(--pl-border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .poll-option:hover { border-color: var(--pl-accent); transform: translateY(-1px); }
+  .poll-option.wrong { border-color: var(--pl-bad); opacity: 0.6; cursor: not-allowed; }
+  .poll-result {
+    padding: 1.2rem;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--pl-good);
+    border: 1px solid var(--pl-good);
+    border-radius: 12px;
+  }
+  .poll-result[hidden] { display: none; }
 
   /* FOOTER */
   footer {
@@ -761,6 +810,27 @@
         <li><img src="https://cdn.simpleicons.org/redis" alt="" loading="lazy" onerror="this.style.display='none'">Redis</li>
       </ul>
     </div>
+
+    <div class="skills-group">
+      <h3>Fun fact</h3>
+      <ul>
+        <li>I'm trilingual and learning my fourth language!</li>
+        <li>
+          I currently speak English, French, and Mandarin Chinese.
+        </li>
+      </ul>
+      <div class="poll" id="poll">
+            <h3 class="poll-question">Guess my 4th language</h3>
+
+            <div class="poll-options" id="poll-options">
+              <button type="button" class="poll-option">Japanese</button>
+              <button type="button" class="poll-option" data-correct>Italian</button>
+              <button type="button" class="poll-option">Spanish</button>
+            </div>
+
+            <div class="poll-result" id="poll-result" hidden role="status">Correct! Come Stai?</div>
+          </div>
+    </div>
   </div>
 </section>
 
@@ -772,10 +842,9 @@
   <div class="about-grid">
     <div class="about-text">
       <h2 class="section-title">Hi I'm India!</h2>
-        <p>I'm an NYU CS grad (Go Violets!!! &#9917; &#9917; &#9917;) working as a Full-Stack Software Engineer in New York, New York.</p>
+        <p>I'm an NYU CS grad (Go Violets!!! &#9917; &#9917; &#9917;) working as a Full-Stack Software Engineer in New York.</p>
         <p>I've designed full-stack payment integrations for multiple start-ups
           as well as vetting critical automation for international enterprises.</p>
-          <p>I excel as an emphathetic leader thanks to my years of experience teaching and serving my community.</p>
           <p>My creative thinking and decision-making ability make me an asset to fast-paced teams of developers who value quality as highly as productivity. </p>
       <a href="https://github.com/igdaniel-1" target="_blank" rel="noopener" class="btn btn-outline" style="margin-top:0.5rem;">View GitHub profile ↗</a>
     </div>
@@ -956,6 +1025,26 @@ function renderProjects(repos) {
 }
 
 fetchGitHub();
+</script>
+<script>
+  (function () {
+    var options = document.getElementById("poll-options");
+    var result = document.getElementById("poll-result");
+
+    options.addEventListener("click", function (e) {
+      var btn = e.target.closest(".poll-option");
+      if (!btn || btn.classList.contains("wrong")) return;
+
+      if (btn.hasAttribute("data-correct")) {
+        // Swap the options container for the "Correct" text box
+        options.hidden = true;
+        options.style.display = "none";
+        result.hidden = false;
+      } else {
+        btn.classList.add("wrong"); // wrong pick: dim it, let them try again
+      }
+    });
+  })();
 </script>
 </body>
 </html>
