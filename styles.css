@@ -773,3 +773,38 @@
     .contact-inner { padding: 2.5rem 1.5rem; }
     footer { flex-direction: column; gap: 0.75rem; text-align: center; }
   }
+
+
+
+
+
+/* BLOG */
+
+#blog-header{
+  margin-bottom: 20px;
+}
+.blog-post-title{
+  text-decoration: wavy;
+  font-size:180%;
+}
+.individual-blog-post img{
+  width: 100%;
+  height: 80%;
+}
+
+.individual-blog-post{
+  margin-top: 20px;
+}
+.blog-post-content p{
+  margin-bottom: 15px;
+}
+.blog-post-content b{
+  color:#ffbd2e
+}
+.blog-post-content a{
+  color:#ffbd2e
+}
+.beg-of-post-img{
+  width: 20%;
+  justify-self: baseline;
+}
