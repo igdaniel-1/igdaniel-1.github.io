@@ -741,7 +741,9 @@
     color: var(--vh-muted);
   }
   .video-header-fallback a { color: var(--vh-accent); }
-
+  .video-description{
+    margin-bottom: 30px;
+  }
 
   /* FOOTER */
   footer {
