@@ -808,3 +808,11 @@
   width: 20%;
   justify-self: baseline;
 }
+#blogEmailButton{
+  margin-top: 20px;
+}
+#blogEmailButton:hover{
+  color:#fffcd6;
+  background-color: #da4900;
+  outline-color: #fffcd6;
+}
