@@ -109,7 +109,7 @@
   </div>
 </section>
 
-<div class="divider"></div>
+<!-- <div class="divider"></div> -->
 
 
 
@@ -298,7 +298,7 @@ async function fetchGitHub() {
     const repos = await reposRes.json();
 
     document.getElementById('repo-count').textContent = user.public_repos ?? '—';
-    document.getElementById('follower-count').textContent = user.followers ?? '—';
+    // document.getElementById('follower-count').textContent = user.followers ?? '—';
 
     renderProjects(repos);
   } catch (e) {
