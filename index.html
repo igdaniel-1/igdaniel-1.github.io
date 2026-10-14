@@ -15,11 +15,11 @@
   <a class="nav-logo" href="#">igdaniel-1</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
-    <li><a href="blog.html">Blog</a></li>
+    <li><a href="pages/blog.html">Blog</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="resume.html">Resume</a></li>
+    <li><a href="pages/resume.html">Resume</a></li>
   </ul>
 </nav>
 
@@ -32,11 +32,17 @@
     <p class="video-header-sub">Software Engineer</p>
     
     <div class="video-frame">
-      <iframe
+      <div class="video-frame" data-src="https://drive.google.com/file/d/1rAt8noJlOjkZhd_CKiujaat4O3Tz4XtV/preview" data-title="ASL Translation video">
+        <button type="button" class="video-poster" aria-label="Play ASL Translation video"
+                style="background-image:url('images/ASL_translate_i_widescreen.png')">
+          <span class="play-icon">▶</span>
+        </button>
+      </div>
+      <!-- <iframe
         src="https://drive.google.com/file/d/1rAt8noJlOjkZhd_CKiujaat4O3Tz4XtV/preview"
         title="ASL Translation video"
         allow="fullscreen"
-        allowfullscreen></iframe>
+        allowfullscreen></iframe> -->
     </div>
 
     <p class="video-header-fallback">
@@ -364,6 +370,17 @@ fetchGitHub();
       }
     });
   })();
+
+  document.querySelectorAll('.video-frame[data-src]').forEach(frame => {
+  frame.querySelector('.video-poster').addEventListener('click', () => {
+    const iframe = document.createElement('iframe');
+    iframe.src = frame.dataset.src;
+    iframe.title = frame.dataset.title;
+    iframe.allow = 'fullscreen';
+    iframe.allowFullscreen = true;
+    frame.replaceChildren(iframe);
+  });
+});
 </script>
 </body>
 </html>
