@@ -26,23 +26,22 @@
 
 
 <header class="video-header" id="top">
+  <!-- <div class="video-header" id="top"> -->
   <div class="video-header-inner">
     <h1 class="video-header-title">India Grace Daniel</h1>
     <p class="video-header-sub">Software Engineer</p>
-    <!-- <p class="video-header-sub">Software Engineer, Full-Stack, Robotics, GNC, iOS</p> -->
     
     <div class="video-frame">
       <iframe
-        src="https://drive.google.com/file/d/1rAt8noJlOjkZhd_CKiujaat4O3Tz4XtV/view?usp=sharing"
+        src="https://drive.google.com/file/d/1rAt8noJlOjkZhd_CKiujaat4O3Tz4XtV/preview"
         title="ASL Translation video"
-        allow="autoplay; fullscreen"
-        allowfullscreen
-        loading="lazy"></iframe>
+        allow="fullscreen"
+        allowfullscreen></iframe>
     </div>
 
     <p class="video-header-fallback">
       Video not loading?
-      <a href="https://drive.google.com/file/d/1rAt8noJlOjkZhd_CKiujaat4O3Tz4XtV/view?usp=sharing" target="_blank" rel="noopener">Watch it on Google Drive</a>
+      <a href="https://drive.google.com/file/d/1rAt8noJlOjkZhd_CKiujaat4O3Tz4XtV/view?usp=drive_link" target="_blank" rel="noopener">Watch it on Google Drive</a>
     </p>
     <div class="video-description">
       <p>
@@ -52,11 +51,12 @@
         I designed, built, and shipped an on-device ML translation app to the App Store that delivers real-time sign language translation with no WiFi or server dependency.
       </p>
       <p>
-        For more information on the Sign Language Translator I built, contact me at <a href="mailto:igracedaniel@email.com">igracedaniel@gmail.com</a>, 
+        For more information on the Sign Language Translator I built, contact me at <a href="mailto:igracedaniel@gmail.com">igracedaniel@gmail.com</a>, 
         read my abstract on <a href="https://github.com/igdaniel-1/ASL_Translate_Swift">GitHub</a>, or watch the full video demo <a href="https://drive.google.com/file/d/10kOkRgcT26_jOkyaPyjwuHE8A-DUPnL7/view?usp=sharing">here</a>.
       </p>
     </div>
   </div>
+<!-- </div> -->
 </header>
 <div class="divider"></div>
 
@@ -202,9 +202,9 @@
   <h2 id="workTogether">Let's work together</h2>
   <p>Open to collaborations, freelance work, and interesting problems.</p>
   <div class="contact-links">
-    <a href="mailto:igracedaniel@email.com" id="emailButton" class="btn btn-outline">email me!</a>
+    <a href="mailto:igracedaniel@gmail.com" id="emailButton" class="btn btn-outline">email me!</a>
     <a href="https://github.com/igdaniel-1" target="_blank" rel="noopener" class="btn btn-primary">GitHub ↗</a>
-    <a href="https://www.linkedin.com/in/india-grace-daniel/" id='linkedInButton' class="btn btn-outline">LinkedIn ↗</a>
+    <a href="https://www.linkedin.com/in/india-grace-daniel/" id="linkedInButton" class="btn btn-outline">LinkedIn ↗</a>
   </div>
 </div>
 
@@ -215,7 +215,7 @@
 
 
 <div class="divider"></div>
-<div class="video-header" id="top">
+<div class="video-header">
   <div class="video-header-inner">
     <!-- <p class="video-header-sub">Software Engineer, Full-Stack, Robotics, GNC, iOS</p> -->
     
@@ -223,7 +223,7 @@
       <iframe
         src="https://drive.google.com/file/d/1ZAI_3dua75d0Xwmfe3DD2QVJDr9gwaKR/preview"
         title="Robotics Navigation video"
-        allow="autoplay; fullscreen"
+        allow="fullscreen"
         allowfullscreen
         loading="lazy"></iframe>
     </div>
@@ -241,12 +241,15 @@
         to calibrate the movement trajectory of the robot.
       </p>
       <p>
-        For more information on the robotics GNC software I wrote, contact me at <a href="mailto:igracedaniel@email.com">igracedaniel@gmail.com</a>
+        For more information on the robotics GNC software I wrote, contact me at <a href="mailto:igracedaniel@gmail.com">igracedaniel@gmail.com</a>
         and/or read our pitch on <a href="https://github.com/DregsBane-Systems">GitHub</a>.
       </p>
     </div>
   </div>
 </div>
+
+<div class="divider"></div>
+
 
 
 <!-- PROJECTS -->
@@ -314,7 +317,7 @@ function renderProjects(repos) {
     return;
   }
 
-  const projectIcons = ['⚡', '🔧', '🌐', '📡', '🔬', '🛠', '📦', '&#127775'];
+  const projectIcons = ['⚡', '🔧', '🌐', '📡', '🔬', '🛠', '📦', '&#127775;'];
 
   grid.innerHTML = repos.filter(r => !r.fork).map((repo, i) => {
     const lang = repo.language || '';
